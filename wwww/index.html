@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Pythonia</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 15px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+  width: 1540px;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: left;
+  width: 300px; 
+/*  height: 300px; /* only for demonstration, should be removed */
+  background: #ccc;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+date_section {
+  float: left;
+  background-color: #777;
+  padding: 5px;
+  text-align: center;
+  font-size: 20px;
+  color: Orange;
+  width: 1540px;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 1240px;
+  background-color: #f1f1f1;
+/*  height: 300px; /* only for demonstration, should be removed */
+}
+
+/* Clear floats after the columns */
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  width: 1540px;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
+</style>
+</head>
+<body>
+
+<h2>CSS Layout Float</h2>
+<p>In this example, we have created a header, two columns/boxes and a footer. On smaller screens, the columns will stack on top of each other.</p>
+<div w3-include-html="date.html"></div>
+<p>Resize the browser window to see the responsive effect (you will learn more about this in our next chapter - HTML Responsive.)</p>
+
+<header>
+  <h2>Pythonia</h2>
+</header>
+
+
+<section>
+    <date_section>
+       <h3><div w3-include-html="date.html"></div></h3>
+    </date_section>
+</section>
+
+<section>
+  <nav>
+    <ul>
+      <li><p onclick="functionA()">Messinia</p></li>
+      <li><a href="#" onclick="functionB()">Arcadia</a></li>
+      <li><a href="#" onclick="functionC()">Laconia</a></li>
+<script>
+function functionA() {
+        document.getElementById("county_info").innerHTML = '<div w3-include-html="date.html"></div>';
+         console.log("Refreshed"); 
+}
+</script>
+<script>
+function functionB() {
+        document.getElementById("county_info").innerHTML = "TEXT";
+}
+</script>
+<script>
+function functionC() {
+        document.getElementById("county_info").innerHTML = "<div w3-include-html=\"date.html\"></div>";
+        $("#county_info").load("date.html"); 
+}
+</script>
+    </ul>
+    <p id="county_info" align=justify style="background-color:black;
+                            border-radius:0px;
+                            font-size:16px;
+                            padding:0px;
+                            margin:0px;
+                            color:white;
+                            width:100%">
+      <b>
+        This is a Sample Textbox
+      </b>
+    </p>
+  </nav>
+
+  <article>
+    <img src="map.jpg" alt="map of Larda">
+  </article>
+</section>
+
+<footer>
+  <p>Footer</p>
+</footer>
+
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+<script src="jquery.js"></script> 
+
+<script>
+  w3.includeHTML();
+</script>
+
+
+</body>
+</html>

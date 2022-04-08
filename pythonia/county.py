@@ -18,6 +18,10 @@ class County:
     manpower = 0
     modifiers = []
 
+    prosp_diff = 0
+    pop_diff   = 0
+    manp_diff  = 0
+
     def __init__(self, name, population):
         self.name = name
         self.population = population
@@ -32,9 +36,9 @@ class County:
     
     def info(self):
         print(self.name)
-        print("population : " + str(self.population))
-        print("prosperity : " + str(self.prosperity))
-        print("manpower   : " + str(self.manpower))
+        print("population : " + str(self.population) + " (" + str(self.pop_diff)+ ")")
+        print("prosperity : " + str(self.prosperity) + " (" + str(self.prosp_diff)+ ")")
+        print("manpower   : " + str(self.manpower) + " (" + str(self.manp_diff)+ ")")
         
     def advance_turn(self):
         self.update_population()
@@ -43,31 +47,37 @@ class County:
    
     def update_manpower(self):
         target_manpower = self.population * MANPOWER_PERCENTAGE
-        diff = target_manpower - self.manpower
-        incr = self.population * MANPOWER_INCR_PCT
+        diff = int(target_manpower - self.manpower)
+        incr = int(self.population * MANPOWER_INCR_PCT)
         
         if abs(diff) < incr:
             self.manpower += diff
+            self.manp_diff = diff
         else:
             if diff > 0:
                 self.manpower += incr
+                self.manp_diff = incr
             elif diff < 0:
                 self.manpower -= incr
+                self.manp_diff = incr * (-1)
     
     def update_population(self):
-        target_level = self.total_goods / self.population
+        target_level = int(self.total_goods / self.population)
         print(str(target_level))
         if ( target_level > PROSPERITY_MAX_LEVEL):
             target_level = PROSPERITY_MAX_LEVEL
         
         diff = target_level - self.prosperity
         print(str(diff) + " " + str(target_level))
-        self.proesperity = target_level
+
+        self.prosp_diff = target_level - self.prosperity
+        self.prosperity = target_level
     
         pct = diff * 0.2 + random.randrange(-2, 3)/100
         print(str(pct))
         
-        self.population += pct * self.population / 100
+        self.population += int(pct * self.population / 100)
+        self.pop_diff = int(pct * self.population / 100)
         
     def update_industry(self):
         pass 
